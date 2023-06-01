@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\OneDrive - Conestoga College\Conestoga\2023_Level2_Spring\%28Tue_Thu%29Object oriented Programmming\Assignments\Assign-02 AmFmRadio Project\CarRadio-StartingPoint\AmFmRadio.cpp">
+    <ClCompile Include="AmFmRadio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\OneDrive - Conestoga College\Conestoga\2023_Level2_Spring\(Tue_Thu)Object oriented Programmming\Assignments\Assign-02 AmFmRadio Project\CarRadio-StartingPoint\driver.cpp">
+    <ClCompile Include="driver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\OneDrive - Conestoga College\Conestoga\2023_Level2_Spring\%28Tue_Thu%29Object oriented Programmming\Assignments\Assign-02 AmFmRadio Project\CarRadio-StartingPoint\AmFmRadio.h">
+    <ClInclude Include="AmFmRadio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
