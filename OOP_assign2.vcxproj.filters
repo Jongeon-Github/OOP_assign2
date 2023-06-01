@@ -14,4 +14,17 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\OneDrive - Conestoga College\Conestoga\2023_Level2_Spring\%28Tue_Thu%29Object oriented Programmming\Assignments\Assign-02 AmFmRadio Project\CarRadio-StartingPoint\AmFmRadio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\OneDrive - Conestoga College\Conestoga\2023_Level2_Spring\(Tue_Thu)Object oriented Programmming\Assignments\Assign-02 AmFmRadio Project\CarRadio-StartingPoint\driver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\OneDrive - Conestoga College\Conestoga\2023_Level2_Spring\%28Tue_Thu%29Object oriented Programmming\Assignments\Assign-02 AmFmRadio Project\CarRadio-StartingPoint\AmFmRadio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
