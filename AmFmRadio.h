@@ -33,6 +33,7 @@ private:
 
 public:
 
+	// Initialize the values.
 	AmFmRadio(bool On = false);
 	AmFmRadio(bool On, Freqs initPresets[5]);
 	~AmFmRadio();

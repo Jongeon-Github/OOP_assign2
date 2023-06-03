@@ -18,6 +18,13 @@
 
 using namespace std;
 
+
+/*
+* Function: AmFmRadio(bool On)
+* Description: Initialize the values.
+* Parameters: bool On : Radao On/Off
+*/
+
 AmFmRadio::AmFmRadio(bool On) {
     
     // Initialize member variables
@@ -41,7 +48,17 @@ AmFmRadio::AmFmRadio(bool On) {
     }
 }
 
-AmFmRadio::AmFmRadio(bool On, Freqs initialPresets[5]) {
+
+/*
+* Function: AmFmRadio(bool On, Freqs initialPresets[5])
+* Description: Initialize the values.
+* Parameters
+*       bool On : Radao On/Off
+*       Freqs initialPresets[5] : Set frequency from user
+* Returns:
+*/
+
+AmFmRadio::AmFmRadio(bool On, Freqs initPresets[5]) {
     // Initialize member variables with initial presets
     on = true;
     userVolume = 0;
@@ -56,14 +73,28 @@ AmFmRadio::AmFmRadio(bool On, Freqs initialPresets[5]) {
     current_station = 530.0;
     SetDisplayOutput(true);
     for (int i = 0; i < 5; ++i) {
-        presets[i].AMFreq = initialPresets[i].AMFreq;
-        presets[i].FMFreq = initialPresets[i].FMFreq;
+        presets[i].AMFreq = initPresets[i].AMFreq;
+        presets[i].FMFreq = initPresets[i].FMFreq;
     }
 }
+
+
+/*
+* Function: ~AmFmRadio()
+* Description: destructor of AmFmRadio
+*/
 
 AmFmRadio::~AmFmRadio() {
     cout << "Destroying AmFmRadio" << endl;
 }
+
+
+/*
+* Function: PowerToggle()
+* Description: Toggles the power state of the car radio.
+* Parameters: None
+* Returns: None
+*/
 
 void AmFmRadio::PowerToggle() {
     if (on == true) {
@@ -97,6 +128,14 @@ void AmFmRadio::PowerToggle() {
     }
 }
 
+
+/*
+* Function: SetVolume()
+* Description: Prompts the user to set the volume of the car radio.
+* Parameters: None
+* Returns: None
+*/
+
 void AmFmRadio::SetVolume() {
     if (on) {
         cout << "Enter the volume level: ";
@@ -121,10 +160,24 @@ void AmFmRadio::SetVolume() {
 }
 
 
+/*
+* Function: SetVolume(int vol)
+* Description: Prompts the user to set the volume of the car radio.
+* Parameters: int vol : User input to set volume.
+* Returns: None.
+*/
+
 void AmFmRadio::SetVolume(int vol) {
     volume = vol;
 }
 
+
+/*
+* Function: ToggleBand()
+* Description: Toggles the frequency band between AM and FM.
+* Parameters: None.
+* Returns: None.
+*/
 
 void AmFmRadio::ToggleBand() {
     if (on) {
@@ -143,6 +196,14 @@ void AmFmRadio::ToggleBand() {
         cout << "AmFm Radio is off." << endl;
     }
 }
+
+
+/*
+* Function: SetPresetButton(int buttonNum)
+* Description: Sets the specified button (radio preset) with the current station.
+* Parameters: int buttonNum : User input to set presents list.
+* Returns: int value : 1 is Set button is working well, 0 is invaild number, -2 is Radao is off.
+*/
 
 int AmFmRadio::SetPresetButton(int buttonNum) {
     if (on && buttonNum >= 0 && buttonNum < 5) {
@@ -164,6 +225,14 @@ int AmFmRadio::SetPresetButton(int buttonNum) {
     }
 }
 
+
+/*
+* Function: SelectPresetButton(int buttonNum)
+* Description: Sets the current station to the radio preset specified by the button number.
+* Parameters: int buttonNum : User input to select Freq.
+* Returns: 1 is Set button is working well, 0 is invaild number, -2 is Radao is off.
+*/
+
 int AmFmRadio::SelectPresetButton(int buttonNum) {
     if (on && buttonNum >= 0 && buttonNum < 5) {
         // Select the preset button and set the current frequency based on the current band
@@ -184,6 +253,14 @@ int AmFmRadio::SelectPresetButton(int buttonNum) {
     }
 }
 
+
+/*
+* Function: ShowCurrentSettings()
+* Description: Displays the current settings of the car radio.
+* Parameters: None.
+* Returns: None.
+*/
+
 void AmFmRadio::ShowCurrentSettings() {
      if (GetDisplayOutput()) {
          // Display the current settings of the radio
@@ -198,12 +275,21 @@ void AmFmRadio::ShowCurrentSettings() {
     }
 }
 
+
+/*
+* Function: ScanUp()
+* Description: Changes the frequency up in increments of 0.2 for FM or 10 for AM.
+* Parameters: None.
+* Returns: None.
+*/
+
 void AmFmRadio::ScanUp() {
     if (on) {
         previousFreq = GetCurrentFrequency();
+        // Frequenct UP for AM
         if (strcmp(band, "AM") == 0) {
             if (previousFreq.AMFreq != 0) {
-                previousFreq.AMFreq += 10;
+                previousFreq.AMFreq += 10; // each +10 for AM
                 currentFreq.AMFreq = previousFreq.AMFreq;
                 current_station = currentFreq.AMFreq;
                 if (previousFreq.AMFreq > 1700) {
@@ -215,7 +301,8 @@ void AmFmRadio::ScanUp() {
 
         }
         else {
-            previousFreq.FMFreq += 0.2;
+            // Frequenct up for FM
+            previousFreq.FMFreq += 0.2; // each +0.2 for FM
             currentFreq.FMFreq = previousFreq.FMFreq;
             current_station = currentFreq.FMFreq;
             if (previousFreq.FMFreq > 107.9) {
@@ -224,6 +311,7 @@ void AmFmRadio::ScanUp() {
                 current_station = currentFreq.FMFreq;
             }
         }
+        // displaying scanned frequency or not.
         do {
             cout << endl << "Do you want to know the Frequency? (y/n)" << endl;
             fgets(userInputBuf, sizeof(userInputBuf), stdin);
@@ -248,12 +336,21 @@ void AmFmRadio::ScanUp() {
     }
 }
 
+
+/*
+* Function: ScanDown()
+* Description: Changes the frequency down in increments of 0.2 for FM or 10 for AM.
+* Parameters: None.
+* Returns: None.
+*/
+
 void AmFmRadio::ScanDown() {
     if (on) {
         previousFreq = GetCurrentFrequency();
+        // Frequenct down for AM
         if (strcmp(band, "AM") == 0) {
             if (previousFreq.AMFreq != 0) {
-                previousFreq.AMFreq -= 10;
+                previousFreq.AMFreq -= 10; // each -10 for AM
                 currentFreq.AMFreq = previousFreq.AMFreq;
                 current_station = currentFreq.AMFreq;
                 if (previousFreq.AMFreq < 530) {
@@ -264,7 +361,8 @@ void AmFmRadio::ScanDown() {
             }
         }
         else {
-        previousFreq.FMFreq -= 0.2;
+        // Frequenct down for FM
+        previousFreq.FMFreq -= 0.2; // each -0.2 for FM
         currentFreq.FMFreq = previousFreq.FMFreq;
         current_station = currentFreq.FMFreq;
         if (previousFreq.FMFreq < 87.9) {
@@ -273,6 +371,7 @@ void AmFmRadio::ScanDown() {
             current_station = currentFreq.FMFreq;
             }
         }
+        // displaying scanned frequency or not.
         do {
             cout << endl << "Do you want to know the Frequency? (y/n)" << endl;
             fgets(userInputBuf, sizeof(userInputBuf), stdin);
@@ -297,17 +396,49 @@ void AmFmRadio::ScanDown() {
     }
 }
 
+
+/*
+* Function: GetCurrentVolume()
+* Description: Gets the current volume of the car radio.
+* Parameters: None
+* Returns: return current volume as int.
+*/
+
 int AmFmRadio::GetCurrentVolume() {
     return volume;
 }
+
+
+/*
+* Function: GetCurrentFrequency()
+* Description: Gets the current frequency of the car radio.
+* Parameters: None
+* Returns: return current requency as struct Freqs.
+*/
 
 Freqs AmFmRadio::GetCurrentFrequency() {
     return currentFreq;
 }
 
+
+/*
+* Function: GetDisplayOutput()
+* Description: Checks if the car radio is currently displaying output.
+* Parameters: None
+* Returns: return displayOutput as bool.
+*/
+
 bool AmFmRadio::GetDisplayOutput() {
     return displayOutput;
 }
+
+
+/*
+* Function: SetDisplayOutput(bool display)
+* Description: Sets the display output state of the car radio.
+* Parameters: bool display : The display is that showing all information or not.
+* Returns: None
+*/
 
 void AmFmRadio::SetDisplayOutput(bool display) {
     displayOutput = display;
