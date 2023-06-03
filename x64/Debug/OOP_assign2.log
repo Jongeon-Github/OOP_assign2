@@ -1,18 +1,16 @@
 ﻿  AmFmRadio.cpp
-D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(26,14): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(42,18): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(46,38): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(63,38): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(77,38): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(94,36): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(96,39): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(100,39): warning C4305: '+=': truncation from 'double' to 'float'
-D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(102,43): warning C4305: '=': truncation from 'double' to 'float'
-D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(111,36): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
-D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(113,39): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(117,39): warning C4305: '-=': truncation from 'double' to 'float'
-D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(119,44): warning C4305: '=': truncation from 'double' to 'float'
-D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(130,12): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(26,27): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(27,26): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(38,29): warning C4305: '=': truncation from 'double' to 'float'
+D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(47,27): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(48,26): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(59,29): warning C4305: '=': truncation from 'double' to 'float'
+D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(63,36): warning C4305: '=': truncation from 'double' to 'float'
+D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(88,34): warning C4305: '=': truncation from 'double' to 'float'
+D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(216,39): warning C4305: '+=': truncation from 'double' to 'float'
+D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(220,39): warning C4305: '=': truncation from 'double' to 'float'
+D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(265,35): warning C4305: '-=': truncation from 'double' to 'float'
+D:\C_Lecture\Github\OOP_assign2\OOP_assign2\AmFmRadio.cpp(269,35): warning C4305: '=': truncation from 'double' to 'float'
   driver.cpp
   Generating Code...
   OOP_assign2.vcxproj -> D:\C_Lecture\Github\OOP_assign2\x64\Debug\OOP_assign2.exe

@@ -3,6 +3,7 @@
 * Project: OOP-assign2
 * By: Jongeon Lee
 * Date: Jun 03, 2023
+* Description: This is a class representing a radio with AM/FM capabilities.
 */
 
 #ifndef AMFMRADIO_H
@@ -18,29 +19,59 @@ class AmFmRadio {
 private:
 	Freqs	presets[5];
 	Freqs	previousFreq;
+	Freqs	currentFreq;
+	double	current_station;
+	char	band[3];
+	char	userInputBuf[20];
+	char	userScanDisplay;
+	int		previousVolume;
+	int		userVolume;
 	int		volume;
 	bool	on;
 	bool	displayOutput;
+	bool	scanDisplay;
 
 public:
-	AmFmRadio(bool radioOn = false);
-	AmFmRadio(bool radioOn, Freqs initPresets[5]);
+
+	AmFmRadio(bool On);
+	AmFmRadio(bool On, Freqs initPresets[5]);
 	~AmFmRadio();
 
+	// Toggles the power state of the car radio.
 	void PowerToggle();
+
+	// Prompts the user to set the volume of the car radio.
 	void SetVolume();
 	void SetVolume(int vol);
+	
+	// Toggles the frequency band between AM and FM.
 	void ToggleBand();
-	void SetPresetButton(int buttonNum);
-	void SelectPresetButton(int buttonNum);
+
+	// Sets the specified button (radio preset) with the current station.
+	int SetPresetButton(int buttonNum);
+
+	// Sets the current station to the radio preset specified by the button number.
+	int SelectPresetButton(int buttonNum);
+
+	// Displays the current settings of the car radio.
 	void ShowCurrentSettings();
+
+	// Changes the frequency up in increments of 0.2 for FM or 10 for AM.
 	void ScanUp();
+
+	// Changes the frequency down in increments of 0.2 for FM or 10 for AM.
 	void ScanDown();
-	bool IsRadioOn();
-	float GetCurrentVolume();
-	Freqs* GetPresets();
+
+	//  Gets the current volume of the car radio.
+	int GetCurrentVolume();
+
+	// Gets the current frequency of the car radio.
 	Freqs GetCurrentFrequency();
+
+	// Checks if the car radio is currently displaying output.
 	bool GetDisplayOutput();
+
+	// Sets the display output state of the car radio.
 	void SetDisplayOutput(bool display);
 };
 #endif
