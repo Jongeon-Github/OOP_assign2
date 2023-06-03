@@ -21,7 +21,7 @@ using namespace std;
 AmFmRadio::AmFmRadio(bool On) {
     
     // Initialize member variables
-    on = false;
+    on = true;
     userVolume = 0;
     volume = 0;
     previousVolume = 0;
@@ -43,7 +43,7 @@ AmFmRadio::AmFmRadio(bool On) {
 
 AmFmRadio::AmFmRadio(bool On, Freqs initialPresets[5]) {
     // Initialize member variables with initial presets
-    on = false;
+    on = true;
     userVolume = 0;
     volume = 0;
     previousVolume = 0;
@@ -56,14 +56,8 @@ AmFmRadio::AmFmRadio(bool On, Freqs initialPresets[5]) {
     current_station = 530.0;
     SetDisplayOutput(true);
     for (int i = 0; i < 5; ++i) {
-       presets[i].AMFreq = 530;
-    }
-    for (int j = 0; j < 5; ++j) {
-        presets[j].FMFreq = 87.9;
-    }
-    for (int k = 0; k < 5; ++k) {
-        initialPresets[k].AMFreq = 530;
-        initialPresets[k].FMFreq = 87.9;
+        presets[i].AMFreq = initialPresets[i].AMFreq;
+        presets[i].FMFreq = initialPresets[i].FMFreq;
     }
 }
 

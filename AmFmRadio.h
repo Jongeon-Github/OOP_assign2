@@ -33,7 +33,7 @@ private:
 
 public:
 
-	AmFmRadio(bool On);
+	AmFmRadio(bool On = false);
 	AmFmRadio(bool On, Freqs initPresets[5]);
 	~AmFmRadio();
 
