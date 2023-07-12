@@ -22,15 +22,16 @@ private:
 	Freqs	previousFreq;
 	Freqs	currentFreq;
 	double	current_station;
+	char	initDisplay[20];
+	char	userScanDisplay;
 	char	band[3];
 	char	userInputBuf[20];
-	char	userScanDisplay;
 	int		previousVolume;
 	int		userVolume;
 	int		volume;
 	bool	on;
 	bool	displayOutput;
-	bool	scanDisplay;
+    bool	scanDisplay;
 
 public:
 
@@ -75,5 +76,12 @@ public:
 
 	// Sets the display output state of the car radio.
 	void SetDisplayOutput(bool display);
+
+
+
+	char GetBand();
+	Freqs GetPresets(int i);
+	double SetCurrentStation();
+
 };
 #endif

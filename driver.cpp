@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include < cctype >
 #include "AmFmRadio.h"
 
 using namespace std;
@@ -34,8 +35,12 @@ int main()
 	int			buttonNum = 0;
 	int			previousVolume = 0;
 	char		buf[20] = { NULL };
+	char		userScanDisplay = { NULL };
+	bool		scanDisplay = false;
 	menuItems	choice = TOGGLE_POWER;
-	AmFmRadio	jazzy = { 0 };
+	AmFmRadio	jazzy;
+
+//	jazzy.SetDisplayOutput(scanDisplay);
 
 	do
 	{
@@ -104,6 +109,14 @@ int main()
 		default:
 			cout << "Invalid choice. Try again." << endl;
 		}
+
+		if ((choice != SHOW_CURRENT_SETTINGS) && (choice != QUIT_PROGRAM)) {
+			if (scanDisplay) {
+
+				jazzy.ShowCurrentSettings();
+			}
+		}
+			
 	} while (choice != QUIT_PROGRAM);
 
 	return 0;

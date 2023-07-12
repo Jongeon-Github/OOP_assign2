@@ -35,10 +35,8 @@ AmFmRadio::AmFmRadio(bool On) {
     previousVolume = 0;
     previousFreq = { 530, 87.9 };
     currentFreq = { 530, 87.9 };
-    scanDisplay = false;
     strcpy(band, "AM");
     strcpy(userInputBuf, "\0");
-    userScanDisplay = { NULL };
     current_station = 530.0;
     SetDisplayOutput(true);
     for (int i = 0; i < 5; ++i) {
@@ -46,6 +44,18 @@ AmFmRadio::AmFmRadio(bool On) {
     }
     for (int j = 0; j < 5; ++j) {
         presets[j].FMFreq = 87.9;
+    }
+    cout << endl << "Do you want to display of Radio condition? (y/n)" << endl;
+    fgets(initDisplay, sizeof(initDisplay), stdin);
+    userScanDisplay = tolower(initDisplay[0]);
+    if (userScanDisplay == 'y') {
+        scanDisplay = true;
+    }
+    else if (userScanDisplay == 'n') {
+        scanDisplay = false;
+    }
+    else {
+        scanDisplay = false;
     }
 }
 
@@ -67,12 +77,10 @@ AmFmRadio::AmFmRadio(bool On, Freqs initPresets[5]) {
     previousVolume = 0;
     previousFreq = { 530, 87.9 };
     currentFreq = { 530, 87.9 };
-    scanDisplay = false;
     strcpy(band, "AM");
     strcpy(userInputBuf, "\0");
-    userScanDisplay = { NULL };
     current_station = 530.0;
-    SetDisplayOutput(true);
+    SetDisplayOutput(scanDisplay);
     for (int i = 0; i < 5; ++i) {
         presets[i].AMFreq = initPresets[i].AMFreq;
         presets[i].FMFreq = initPresets[i].FMFreq;
@@ -114,17 +122,12 @@ void AmFmRadio::PowerToggle() {
             volume = previousVolume;
         }
 
-        if (previousFreq.AMFreq != 0) {
+        if (previousFreq.AMFreq != 530) {
             currentFreq.AMFreq = previousFreq.AMFreq;
-            currentFreq.FMFreq = 87.9;
         }
-        else if (previousFreq.FMFreq != 0.0) {
+     
+        if (previousFreq.FMFreq != 87.9) {
             currentFreq.FMFreq = previousFreq.FMFreq;
-            currentFreq.AMFreq = 530;
-        }
-        else {
-            currentFreq.AMFreq = 0;
-            currentFreq.FMFreq = 0.0;
         }
     }
 }
@@ -139,20 +142,9 @@ void AmFmRadio::PowerToggle() {
 
 void AmFmRadio::SetVolume() {
     if (on) {
-        cout << "Enter the volume level: ";
+        cout << "Enter the volume level (0 - 100): ";
         fgets(userInputBuf, sizeof(userInputBuf), stdin);
-        userVolume = atoi(userInputBuf);
-
-        if (userVolume < 0) {
-            userVolume = 0;
-            cout << "## The available volume is from 0 to 100." << endl;
-            cout << "## Automatically changes to 0" << endl;
-        }
-        else if (userVolume > 100) {
-            userVolume = 100;
-            cout << "## The available volume is from 0 to 100." << endl;
-            cout << "## Automatically changes to 100" << endl;
-        }
+        userVolume = atoi(userInputBuf);       
         SetVolume(userVolume);
     }
     else {
@@ -169,6 +161,16 @@ void AmFmRadio::SetVolume() {
 */
 
 void AmFmRadio::SetVolume(int vol) {
+    if (vol < 0) {
+        vol = 0;
+        cout << "## The available volume is from 0 to 100." << endl;
+        cout << "## Automatically changes to 0" << endl;
+    }
+    else if (vol > 100) {
+        vol = 100;
+        cout << "## The available volume is from 0 to 100." << endl;
+        cout << "## Automatically changes to 100" << endl;
+    }
     volume = vol;
 }
 
@@ -263,17 +265,18 @@ int AmFmRadio::SelectPresetButton(int buttonNum) {
 */
 
 void AmFmRadio::ShowCurrentSettings() {
-     if (GetDisplayOutput()) {
-         // Display the current settings of the radio
-         current_station = round(current_station * 100) / 100;
-         cout << endl << "*** Current Settings ***" << endl;
-         cout << (on ? " - Radio is On" : " - Radio is Off") << endl;
-         cout << " - Volume: " << volume << endl;
-         cout << " - Current Frequency: " << band << ": " << current_station << endl;
-         cout << endl << "AM/FM Frequency list" << endl;
-         cout << "AM List: " << presets[0].AMFreq << ", " << presets[1].AMFreq << ", " << presets[2].AMFreq << ", " << presets[3].AMFreq << ", " << presets[4].AMFreq << endl;
-         cout << "FM List: " << presets[0].FMFreq << ", " << presets[1].FMFreq << ", " << presets[2].FMFreq << ", " << presets[3].FMFreq << ", " << presets[4].FMFreq << endl << endl;
-    }
+    // Display the current settings of the radio
+    if (on == true)
+    {
+        current_station = round(current_station * 100) / 100;
+        cout << endl << "*** Current Settings ***" << endl;
+        cout << (on ? " - Radio is On" : " - Radio is Off") << endl;
+        cout << " - Volume: " << volume << endl;
+        cout << " - Current Frequency: " << band << ": " << current_station << endl;
+        cout << endl << "AM/FM Frequency list" << endl;
+        cout << "AM List: " << presets[0].AMFreq << ", " << presets[1].AMFreq << ", " << presets[2].AMFreq << ", " << presets[3].AMFreq << ", " << presets[4].AMFreq << endl;
+        cout << "FM List: " << presets[0].FMFreq << ", " << presets[1].FMFreq << ", " << presets[2].FMFreq << ", " << presets[3].FMFreq << ", " << presets[4].FMFreq << endl << endl;
+    }   
 }
 
 
@@ -311,25 +314,6 @@ void AmFmRadio::ScanUp() {
                 currentFreq.FMFreq = previousFreq.FMFreq;
                 current_station = currentFreq.FMFreq;
             }
-        }
-        // displaying scanned frequency or not.
-        do {
-            cout << endl << "Do you want to know the Frequency? (y/n)" << endl;
-            fgets(userInputBuf, sizeof(userInputBuf), stdin);
-            userScanDisplay = tolower(userInputBuf[0]);
-            if (userScanDisplay == 'y') {
-                scanDisplay = true;
-            }
-            else if (userScanDisplay == 'n') {
-                scanDisplay = false;
-            }
-            else {
-                cout << "You entered an invalid letter!" << endl;
-            }
-        } while (userScanDisplay != 'y' && userScanDisplay != 'n');
-
-        if (scanDisplay) {
-            cout << endl << " *** Current Frequency is (" << band << ") " << current_station << endl;
         }
     }
     else {
@@ -371,25 +355,6 @@ void AmFmRadio::ScanDown() {
             currentFreq.FMFreq = previousFreq.FMFreq;
             current_station = currentFreq.FMFreq;
             }
-        }
-        // displaying scanned frequency or not.
-        do {
-            cout << endl << "Do you want to know the Frequency? (y/n)" << endl;
-            fgets(userInputBuf, sizeof(userInputBuf), stdin);
-            userScanDisplay = tolower(userInputBuf[0]);
-            if (userScanDisplay == 'y') {
-                scanDisplay = true;
-            }
-            else if (userScanDisplay == 'n') {
-                scanDisplay = false;
-            }
-            else {
-                cout << "You entered an invalid letter!" << endl;
-            }
-        } while (userScanDisplay != 'y' && userScanDisplay != 'n');
-
-        if (scanDisplay) {
-            cout << endl << " *** Current Frequency is (" << band << ") " << current_station << endl;
         }
     }
     else {
@@ -443,4 +408,24 @@ bool AmFmRadio::GetDisplayOutput() {
 
 void AmFmRadio::SetDisplayOutput(bool display) {
     displayOutput = display;
+}
+
+
+
+
+
+
+
+char AmFmRadio::GetBand() {
+    return *band;
+}
+
+
+Freqs AmFmRadio::GetPresets(int i) {
+    return presets[i];
+}
+
+
+double AmFmRadio::SetCurrentStation() {
+    return current_station;
 }
